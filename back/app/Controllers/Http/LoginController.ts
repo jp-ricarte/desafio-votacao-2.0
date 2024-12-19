@@ -4,7 +4,7 @@ import LoginService from "App/Services/LoginService";
 
 export default class LoginController {
 
-  public loginService: LoginService;
+  private loginService: LoginService;
 
   constructor() {
     this.loginService = new LoginService();
@@ -16,7 +16,6 @@ export default class LoginController {
 
   public async login({ request, auth }) {
     const data: Login = request.all();
-    console.log('[data]', data)
     const token = await auth.attempt(data.email, data.password)
 
     return token;
@@ -31,16 +30,5 @@ export default class LoginController {
     const data: Login = context.request.all() as Login;
 
     return await this.loginService.salvarUsuario(data);
-  }
-
-  public async patch(context: HttpContextContract) {
-    const data: Login = context.request.all() as Login;
-    const id: number = context.params.id;
-    return await this.loginService.editarUsuario(data, id);
-  }
-
-  public async delete(context: HttpContextContract) {
-    const id: number = context.params.id;
-    return await this.loginService.excluirUsuario(id);
   }
 }

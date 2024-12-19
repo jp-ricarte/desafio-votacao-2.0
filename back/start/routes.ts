@@ -28,6 +28,4 @@ Route.group(() => {
   Route.get('/usuarios', 'LoginController.get');
   Route.get('/usuarios/:id', 'LoginController.index');
   Route.post('/usuarios', 'LoginController.post');
-  Route.patch('/usuarios/:id', 'LoginController.patch');
-  Route.delete('/usuarios/:id', 'LoginController.delete');
 }).middleware(['jwtAuth']);
