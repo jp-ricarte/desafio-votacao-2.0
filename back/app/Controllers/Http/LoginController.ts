@@ -3,32 +3,31 @@ import { Login } from "App/Models/LoginModel";
 import LoginService from "App/Services/LoginService";
 
 export default class LoginController {
+    private loginService: LoginService;
 
-  private loginService: LoginService;
+    constructor() {
+        this.loginService = new LoginService();
+    }
 
-  constructor() {
-    this.loginService = new LoginService();
-  }
+    public async get(): Promise<Login[]> {
+        return await this.loginService.listarUsuarios();
+    }
 
-  public async get() {
-    return await this.loginService.listarUsuarios();
-  }
+    public async login({ request, auth }): Promise<string> {
+        const data: Login = request.body();
+        const token = await auth.attempt(data.email, data.password);
 
-  public async login({ request, auth }) {
-    const data: Login = request.all();
-    const token = await auth.attempt(data.email, data.password)
+        return token;
+    }
 
-    return token;
-  }
+    public async index(context: HttpContextContract): Promise<Login> {
+        const id: number = context.params.id;
+        return await this.loginService.getUsuario(id);
+    }
 
-  public async index(context: HttpContextContract) {
-    const id: number = context.params.id;
-    return await this.loginService.getUsuario(id);
-  }
+    public async post(context: HttpContextContract): Promise<string> {
+        const data: Login = context.request.all() as Login;
 
-  public async post(context: HttpContextContract) {
-    const data: Login = context.request.all() as Login;
-
-    return await this.loginService.salvarUsuario(data);
-  }
+        return await this.loginService.salvarUsuario(data);
+    }
 }

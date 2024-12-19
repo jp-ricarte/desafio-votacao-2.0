@@ -8,11 +8,12 @@ export default class Pautas extends BaseSchema {
       table.increments('id')
       table.string('title', 255).notNullable()
       table.string('description', 255)
+      table.dateTime('voting_end', { useTz: true })
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
-      table.timestamp('created_at', { useTz: true })
-      table.timestamp('updated_at', { useTz: true })
+      table.timestamp('created_at').defaultTo(this.now())
+      table.timestamp('updated_at').defaultTo(this.now())
     })
   }
 
