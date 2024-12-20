@@ -7,10 +7,14 @@ import { LoginComponent } from './pages/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { PautasComponent } from './pages/pautas/pautas.component';
+import { LoadingModule } from './utils/loading/loading.module';
 
 import { ButtonModule } from 'primeng/button';
 import { PasswordModule } from 'primeng/password';
-import { InputTextModule } from 'primeng/inputtext'
+import { InputTextModule } from 'primeng/inputtext';
+import { ToastModule } from 'primeng/toast';
+import { MessageService } from 'primeng/api';
+import { ToolbarModule } from 'primeng/toolbar';
 
 @NgModule({
     declarations: [AppComponent, LoginComponent, PautasComponent],
@@ -22,11 +26,14 @@ import { InputTextModule } from 'primeng/inputtext'
         ButtonModule,
         InputTextModule,
         PasswordModule,
+        ToastModule,
+        ToolbarModule,
 
         ReactiveFormsModule,
-        HttpClientModule
+        HttpClientModule,
+        LoadingModule
     ],
-    providers: [],
+    providers: [MessageService],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

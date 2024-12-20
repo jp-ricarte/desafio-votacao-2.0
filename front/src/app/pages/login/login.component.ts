@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/services/auth.service';
 export class LoginComponent implements OnInit {
     form = this.fb.group({
         email: [null, [Validators.required, Validators.email]],
-        password: [null, [Validators.required, Validators.minLength(6)]],
+        password: [null, [Validators.required]],
     });
     constructor(private fb: FormBuilder, private auth: AuthService) {}
 
