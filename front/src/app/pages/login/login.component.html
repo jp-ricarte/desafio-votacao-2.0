@@ -1,0 +1,43 @@
+<div
+    class="container d-flex justify-content-center align-items-center"
+    style="height: 100vh"
+>
+    <div class="card p-4 shadow-lg" style="width: 400px">
+        <div class="text-center mb-3">
+            <i class="pi pi-user text-primary" style="font-size: 2rem"></i>
+            <h3>Sistema de votação</h3>
+        </div>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="form-group mb-3">
+                <label for="email">Email</label>
+                <input
+                    id="email"
+                    type="email"
+                    formControlName="email"
+                    class="form-control"
+                    placeholder="Digite seu email"
+                />
+            </div>
+            <div class="form-group mb-3">
+                <label for="password">Senha</label>
+                <input
+                    formControlName="password"
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    placeholder="Digite sua senha"
+                />
+            </div>
+            <button
+                pButton
+                type="submit"
+                label="Entrar"
+                class="btn btn-primary w-100"
+                [disabled]="form.invalid"
+            ></button>
+            <div class="text-center mt-3">
+                <a routerLink="/register">Criar conta</a>
+            </div>
+        </form>
+    </div>
+</div>

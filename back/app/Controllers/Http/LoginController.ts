@@ -1,5 +1,5 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import { Login } from "App/Models/LoginModel";
+import { Login, Token } from "App/Models/LoginModel";
 import LoginService from "App/Services/LoginService";
 
 export default class LoginController {
@@ -13,7 +13,7 @@ export default class LoginController {
         return await this.loginService.listarUsuarios();
     }
 
-    public async login({ request, auth }): Promise<string> {
+    public async login({ request, auth }): Promise<Token> {
         const data: Login = request.body();
         const token = await auth.attempt(data.email, data.password);
 
