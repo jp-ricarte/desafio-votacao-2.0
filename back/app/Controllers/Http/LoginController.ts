@@ -1,3 +1,4 @@
+import { Exception } from "@adonisjs/core/build/standalone";
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import { Login, Token } from "App/Models/LoginModel";
 import LoginService from "App/Services/LoginService";
@@ -15,7 +16,12 @@ export default class LoginController {
 
     public async login({ request, auth }): Promise<Token> {
         const data: Login = request.body();
-        const token = await auth.attempt(data.email, data.password);
+        let token: Token;
+        try {
+             token = await auth.attempt(data.email, data.password);
+        } catch (error) {
+            throw new Exception('Email ou senha incorretos', 412);
+        }
 
         return token;
     }

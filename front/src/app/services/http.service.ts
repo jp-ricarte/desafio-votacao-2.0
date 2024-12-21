@@ -15,7 +15,8 @@ import { MessageService } from 'primeng/api';
 export class HttpService {
     private baseUrl: string = environment.url;
 
-    constructor(private http: HttpClient, private message: MessageService) {}
+    constructor(private message: MessageService, private http: HttpClient) {
+    }
 
     private getHeaders(): HttpHeaders {
         return new HttpHeaders()

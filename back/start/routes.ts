@@ -29,9 +29,9 @@ Route.group(() => {
   Route.get("/usuarios/:id", "LoginController.index");
   Route.post("/usuarios", "LoginController.post");
 
-  Route.get("/pautas", "LoginController.get");
-  Route.get("/pautas/:id", "LoginController.index");
-  Route.post("/pautas", "LoginController.post");
+  Route.get("/pautas", "PautaController.get");
+  // Route.get("/pautas/:id", "PautaController.index");
+  Route.post("/pautas", "PautaController.post");
 })
   .prefix("apiVotacao")
   .middleware(["jwtAuth"]);

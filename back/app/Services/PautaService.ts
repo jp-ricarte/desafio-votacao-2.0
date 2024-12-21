@@ -8,7 +8,7 @@ export default class PautaService {
     private addStatusQuery(query) {
         return query.select(
             Database.raw(
-                `CASE WHEN voting_end > NOW() THEN true ELSE false END AS status`
+                `CASE WHEN voting_end > DATETIME('now') THEN true ELSE false END AS status`
             )
         );
     }

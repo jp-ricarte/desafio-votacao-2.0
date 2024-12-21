@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
 import { AuthGuard } from './guards/auth-guard';
 import { PautasComponent } from './pages/pautas/pautas.component';
+import { LayoutComponent } from './pages/layout/layout.component';
 
 const routes: Routes = [
     {
@@ -11,10 +12,11 @@ const routes: Routes = [
         canActivate: [],
     },
     {
-        path: 'pautas',
-        component: PautasComponent,
+        path: '',
+        component: LayoutComponent,
         canActivate: [AuthGuard],
-      },
+        children: [{ path: 'pautas', component: PautasComponent }],
+    },
     { path: '', redirectTo: '/login', pathMatch: 'full' },
     { path: '**', redirectTo: '/login' },
 ];
