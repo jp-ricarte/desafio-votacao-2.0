@@ -33,6 +33,8 @@ Route.group(() => {
     Route.get('/pautas/:id', 'PautaController.index');
     Route.post('/pautas', 'PautaController.post');
 
+    Route.get('/categorias', 'PautaController.getCategories');
+
     Route.get('/pautas/:id/voto/:voto', 'PautaController.vote');
     Route.get('/pautas/:id/resultado', 'PautaController.resultadoVotosPauta');
 })

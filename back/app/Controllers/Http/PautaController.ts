@@ -3,6 +3,7 @@ import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
 import PautaService from "App/Services/PautaService";
 import { Login } from "App/Models/LoginModel";
 import { MessageResponse } from "App/Models/MessageSucessModel";
+import { Categorias } from "App/Models/CategoriasModel";
 
 export default class PautaController {
     private pautaService: PautaService;
@@ -36,5 +37,9 @@ export default class PautaController {
     public async resultadoVotosPauta(context: HttpContextContract) {
         const idPauta: number = context.params.id;
         return await this.pautaService.resultadoVotosPauta(idPauta);
+    }
+
+    public async getCategories(): Promise<Categorias[]> {
+        return await this.pautaService.listarCategorias();
     }
 }

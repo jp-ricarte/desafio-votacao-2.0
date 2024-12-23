@@ -1,15 +1,31 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
     <div class="row">
-        <div class="col-12 col-md-8 mb-3">
+        <div class="col-12 mb-3">
             <label for="title">Título</label>
-            <input
-                id="title"
-                formControlName="title"
-                class="form-control"
-            />
-            <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="text-danger">
+            <input id="title" formControlName="title" class="form-control" />
+            <div
+                *ngIf="form.get('title')?.invalid && form.get('title')?.touched"
+                class="text-danger"
+            >
                 O título é obrigatório.
             </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 col-md-8 mb-3">
+            <label for="categoria_id">Categoria</label>
+            <select
+                id="categoria_id"
+                formControlName="categoria_id"
+                class="form-control"
+            >
+                <option
+                    *ngFor="let categoria of categorias"
+                    [value]="categoria.id"
+                >
+                    {{ categoria.category }}
+                </option>
+            </select>
         </div>
         <div
             class="col-12 col-md-4 mb-3"

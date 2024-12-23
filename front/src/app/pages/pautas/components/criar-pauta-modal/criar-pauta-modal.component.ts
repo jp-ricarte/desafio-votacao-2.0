@@ -3,6 +3,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoadingService } from '../../../../services/loading.service';
 import { PautaService } from '../../../../services/pauta.service';
+import { Categorias } from '../../../../models/categorias.model';
 import { finalize } from 'rxjs/operators';
 
 @Component({
@@ -11,8 +12,10 @@ import { finalize } from 'rxjs/operators';
     styleUrls: ['./criar-pauta-modal.component.scss'],
 })
 export class CriarPautaModalComponent implements OnInit {
+    categorias: Categorias[] = [];
     form = this.fb.group({
         title: [null, Validators.required],
+        categoria_id: [null, Validators.required],
         description: [null],
         voting_end: [null],
     });
@@ -23,7 +26,19 @@ export class CriarPautaModalComponent implements OnInit {
         private loading: LoadingService
     ) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.getCategories();
+    }
+
+    getCategories(): void {
+        this.loading.start();
+        this.pauta
+            .getCategories()
+            .pipe(finalize(() => this.loading.stop()))
+            .subscribe((categorias) => {
+                this.categorias = categorias;
+            });
+    }
 
     onSubmit(): void {
         this.loading.start();

@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CreatePauta, Pauta } from '../models/pauta.model';
 import { VotoResult } from '../models/voto.model';
 import { MessageResponse } from '../models/response-message.model';
+import { Categorias } from '../models/categorias.model';
 
 @Injectable()
 export class PautaService extends HttpService {
@@ -25,5 +26,9 @@ export class PautaService extends HttpService {
 
     pautaResult(id: number): Observable<VotoResult> {
         return this.get(`pautas/${id}/resultado`);
+    }
+
+    getCategories(): Observable<Categorias[]> {
+        return this.get('categorias');
     }
 }
