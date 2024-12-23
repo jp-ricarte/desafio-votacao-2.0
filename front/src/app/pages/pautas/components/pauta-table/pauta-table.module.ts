@@ -1,10 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TableModule } from 'primeng/table';
 import { PautaTableComponent } from './pauta-table.component';
-import { TagModule } from 'primeng/tag';
-import { ButtonModule } from 'primeng/button';
-import { CriarPautaModalComponent } from '../criar-pauta-modal/criar-pauta-modal.component';
+import { UtilsModule } from 'src/app/utils/utils.module';
 
 @NgModule({
     declarations: [
@@ -12,9 +9,7 @@ import { CriarPautaModalComponent } from '../criar-pauta-modal/criar-pauta-modal
     ],
     imports: [
         CommonModule,
-        TableModule,
-        TagModule,
-        ButtonModule
+        UtilsModule
     ],
     exports: [
         PautaTableComponent

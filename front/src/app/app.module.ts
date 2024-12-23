@@ -27,6 +27,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { PautaInformacoesComponent } from './pages/pauta-informacoes/pauta-informacoes.component';
 import { CriarPautaModalModule } from './pages/pautas/components/criar-pauta-modal/criar-pauta-modal.module';
 import { CountdownGlobalConfig, CountdownModule } from 'ngx-countdown';
+import { UtilsModule } from './utils/utils.module';
 
 @NgModule({
     declarations: [
@@ -44,19 +45,7 @@ import { CountdownGlobalConfig, CountdownModule } from 'ngx-countdown';
         PautaTableModule,
         CriarPautaModalModule,
 
-        ButtonModule,
-        InputTextModule,
-        PasswordModule,
-        ToolbarModule,
-        ConfirmDialogModule,
-        DynamicDialogModule,
-        MessageModule,
-
-        ReactiveFormsModule,
-        HttpClientModule,
-        LoadingModule,
-
-        CountdownModule,
+        UtilsModule,
 
         ToastrModule.forRoot({
             timeOut: 3000,

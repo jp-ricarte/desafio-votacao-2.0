@@ -16,6 +16,7 @@ import { MessageResponse } from 'src/app/models/response-message.model';
 export class PautaInformacoesComponent implements OnInit {
     pauta: Pauta;
     results: VotoResult;
+    atualizadoEm: Date;
 
     constructor(
         private route: ActivatedRoute,
@@ -71,6 +72,7 @@ export class PautaInformacoesComponent implements OnInit {
             .pipe(finalize(() => this.loading.stop()))
             .subscribe((results) => {
                 this.results = results;
+                this.atualizadoEm = new Date();
             });
     }
 
