@@ -1,14 +1,12 @@
 import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 
-export default class Votos extends BaseSchema {
-  protected tableName = 'votos'
+export default class Categorias extends BaseSchema {
+  protected tableName = 'categorias'
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
-      table.string('cpf', 11).notNullable().references('cpf').inTable('usuarios').onDelete('CASCADE')
-      table.integer('pauta_id').unsigned().references('id').inTable('pautas').onDelete('CASCADE').notNullable()
-      table.boolean('vote').notNullable()
+      table.string('category').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

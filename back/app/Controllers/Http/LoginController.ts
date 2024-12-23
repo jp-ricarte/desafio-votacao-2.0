@@ -17,13 +17,15 @@ export default class LoginController {
     public async login({ request, auth }): Promise<Token> {
         const data: Login = request.body();
         let token: Token;
+        let user: Login;
         try {
-             token = await auth.attempt(data.email, data.password);
+            token = await auth.attempt(data.email, data.password);
+            user = auth.user;
         } catch (error) {
-            throw new Exception('Email ou senha incorretos', 412);
+            throw new Exception("Credenciais inválidas", 401);
         }
 
-        return token;
+        return { token: token.token, type: token.type, user };
     }
 
     public async index(context: HttpContextContract): Promise<Login> {

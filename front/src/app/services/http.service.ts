@@ -7,7 +7,7 @@ import {
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
-import { MessageService } from 'primeng/api';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
     providedIn: 'root',
@@ -15,28 +15,25 @@ import { MessageService } from 'primeng/api';
 export class HttpService {
     private baseUrl: string = environment.url;
 
-    constructor(private message: MessageService, private http: HttpClient) {
+    constructor(private toastr: ToastrService, private http: HttpClient) {
     }
 
     private getHeaders(): HttpHeaders {
         return new HttpHeaders()
             .set('Content-Type', 'application/json')
+            .set('Accept', '*/*')
             .set('Access-Control-Allow-Origin', '*')
             .set('Authorization', 'Bearer ' + localStorage.getItem('token'));
     }
 
     private handleError(error: HttpErrorResponse): Observable<never> {
         let errorMessage = 'Erro desconhecido';
-        if (error.error instanceof ErrorEvent) {
-            errorMessage = 'Erro: ' + error.error.message;
+        if (error.error?.message) {
+            errorMessage = error.error.message;
         } else {
-            errorMessage = 'Código do erro: ' + error.status + 'Mensagem: ' + error.message;
+            errorMessage = 'Código do erro: ' + error.status + '\nMensagem: ' + error.message;
         }
-        this.message.add({
-            severity: 'error',
-            summary: 'Ops!',
-            detail: errorMessage,
-        });
+        this.toastr.error(errorMessage, 'Ops!');
         return throwError(errorMessage);
     }
 
@@ -45,7 +42,7 @@ export class HttpService {
             .get<T>(`${this.baseUrl}/${endpoint}`, {
                 headers: this.getHeaders(),
             })
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(this.handleError.bind(this)));
     }
 
     post<T>(endpoint: string, body: any): Observable<T> {
@@ -53,7 +50,7 @@ export class HttpService {
             .post<T>(`${this.baseUrl}/${endpoint}`, body, {
                 headers: this.getHeaders(),
             })
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(this.handleError.bind(this)));
     }
 
     put<T>(endpoint: string, body: any): Observable<T> {
@@ -61,7 +58,7 @@ export class HttpService {
             .put<T>(`${this.baseUrl}/${endpoint}`, body, {
                 headers: this.getHeaders(),
             })
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(this.handleError.bind(this)));
     }
 
     patch<T>(endpoint: string, body: any): Observable<T> {
@@ -69,7 +66,7 @@ export class HttpService {
             .patch<T>(`${this.baseUrl}/${endpoint}`, body, {
                 headers: this.getHeaders(),
             })
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(this.handleError.bind(this)));
     }
 
     delete<T>(endpoint: string): Observable<T> {
@@ -77,6 +74,6 @@ export class HttpService {
             .delete<T>(`${this.baseUrl}/${endpoint}`, {
                 headers: this.getHeaders(),
             })
-            .pipe(catchError(this.handleError));
+            .pipe(catchError(this.handleError.bind(this)));
     }
 }

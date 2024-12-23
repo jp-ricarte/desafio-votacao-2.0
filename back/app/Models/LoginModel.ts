@@ -3,6 +3,8 @@ export interface Login {
     username: string;
     email: string;
     password: string;
+    cpf: string;
+    is_admin: boolean;
     created_at?: Date;
     updated_at?: Date;
 }
@@ -10,4 +12,6 @@ export interface Login {
 export interface Token {
     type: string;
     token: string;
+
+    user: Login;
 }

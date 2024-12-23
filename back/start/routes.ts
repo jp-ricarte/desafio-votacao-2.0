@@ -18,20 +18,23 @@
 |
 */
 
-import Route from "@ioc:Adonis/Core/Route";
+import Route from '@ioc:Adonis/Core/Route';
 
 Route.group(() => {
-  Route.post("/login", "LoginController.login");
-}).prefix("apiVotacao");
+    Route.post('/login', 'LoginController.login');
+}).prefix('apiVotacao');
 
 Route.group(() => {
-  Route.get("/usuarios", "LoginController.get");
-  Route.get("/usuarios/:id", "LoginController.index");
-  Route.post("/usuarios", "LoginController.post");
+    Route.get('/usuarios', 'LoginController.get');
+    Route.get('/usuarios/:id', 'LoginController.index');
+    Route.post('/usuarios', 'LoginController.post');
 
-  Route.get("/pautas", "PautaController.get");
-  // Route.get("/pautas/:id", "PautaController.index");
-  Route.post("/pautas", "PautaController.post");
+    Route.get('/pautas', 'PautaController.get');
+    Route.get('/pautas/:id', 'PautaController.index');
+    Route.post('/pautas', 'PautaController.post');
+
+    Route.get('/pautas/:id/voto/:voto', 'PautaController.vote');
+    Route.get('/pautas/:id/resultado', 'PautaController.resultadoVotosPauta');
 })
-  .prefix("apiVotacao")
-  .middleware(["jwtAuth"]);
+    .prefix('apiVotacao')
+    .middleware(['jwtAuth']);

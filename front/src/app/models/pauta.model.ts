@@ -6,5 +6,11 @@ export interface Pauta {
     created_at?: Date;
     updated_at?: Date;
 
-    status?: boolean;
+    status: boolean;
+}
+
+export interface CreatePauta {
+    title: string;
+    description?: string;
+    voting_end?: Date;
 }

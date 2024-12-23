@@ -8,3 +8,9 @@ export interface Pauta {
 
     status?: boolean;
 }
+
+export interface CreatePauta {
+    title: string;
+    description?: string;
+    voting_end?: Date;
+}

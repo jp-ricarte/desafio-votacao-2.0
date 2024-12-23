@@ -1,0 +1,47 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row">
+        <div class="col-12 col-md-8 mb-3">
+            <label for="title">Título</label>
+            <input
+                id="title"
+                formControlName="title"
+                class="form-control"
+            />
+            <div *ngIf="form.get('title')?.invalid && form.get('title')?.touched" class="text-danger">
+                O título é obrigatório.
+            </div>
+        </div>
+        <div
+            class="col-12 col-md-4 mb-3"
+            pTooltip="Tempo padrão de votação é de 1 minuto"
+            tooltipPosition="right"
+            tooltipEvent="hover"
+        >
+            <label for="voting_end">Fim da Votação</label>
+            <input
+                id="voting_end"
+                formControlName="voting_end"
+                type="datetime-local"
+                class="form-control"
+            />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 mb-3">
+            <label for="description">Descrição</label>
+            <textarea
+                formControlName="description"
+                id="description"
+                class="form-control"
+                rows="5"
+            ></textarea>
+        </div>
+    </div>
+    <button
+        pButton
+        type="submit"
+        label="Criar Pauta e Iniciar Votação"
+        class="btn btn-primary w-100"
+        [disabled]="form.invalid"
+    ></button>
+</form>
