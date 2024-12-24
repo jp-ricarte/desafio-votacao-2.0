@@ -9,6 +9,13 @@ export interface Login {
     updated_at?: Date;
 }
 
+export interface CreateUser {
+    username: string;
+    email: string;
+    password: string;
+    cpf: string;
+}
+
 export interface Token {
     type: string;
     token: string;

@@ -1,6 +1,7 @@
 import { Exception } from "@adonisjs/core/build/standalone";
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import { Login, Token } from "App/Models/LoginModel";
+import { CreateUser, Login, Token } from "App/Models/LoginModel";
+import { MessageResponse } from "App/Models/MessageSucessModel";
 import LoginService from "App/Services/LoginService";
 
 export default class LoginController {
@@ -33,9 +34,8 @@ export default class LoginController {
         return await this.loginService.getUsuario(id);
     }
 
-    public async post(context: HttpContextContract): Promise<string> {
-        const data: Login = context.request.all() as Login;
-
-        return await this.loginService.salvarUsuario(data);
+    public async post({ request, auth }): Promise<MessageResponse> {
+        const data: CreateUser = request.body() as CreateUser;
+        return await this.loginService.salvarUsuario(data, auth?.user);
     }
 }

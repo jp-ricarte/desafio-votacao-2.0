@@ -17,6 +17,7 @@ import { LoadingModule } from './loading/loading.module';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CountdownModule } from 'ngx-countdown';
 import { TooltipModule } from 'primeng/tooltip';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
     declarations: [],
@@ -40,7 +41,9 @@ import { TooltipModule } from 'primeng/tooltip';
         ReactiveFormsModule,
         HttpClientModule,
         LoadingModule,
-        CountdownModule
+        CountdownModule,
+        NgxMaskModule.forRoot(),
+
     ],
     exports: [
         ButtonModule,

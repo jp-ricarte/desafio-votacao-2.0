@@ -22,12 +22,13 @@ import Route from '@ioc:Adonis/Core/Route';
 
 Route.group(() => {
     Route.post('/login', 'LoginController.login');
+    Route.post('/usuarios', 'LoginController.post');
+
 }).prefix('apiVotacao');
 
 Route.group(() => {
     Route.get('/usuarios', 'LoginController.get');
     Route.get('/usuarios/:id', 'LoginController.index');
-    Route.post('/usuarios', 'LoginController.post');
 
     Route.get('/pautas', 'PautaController.get');
     Route.get('/pautas/:id', 'PautaController.index');

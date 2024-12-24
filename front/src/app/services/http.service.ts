@@ -30,8 +30,9 @@ export class HttpService {
         let errorMessage = 'Erro desconhecido';
         if (error.error?.message) {
             errorMessage = error.error.message;
-        } else {
-            errorMessage = 'Código do erro: ' + error.status + '\nMensagem: ' + error.message;
+        }
+        else {
+            errorMessage = 'Mensagem: ' + error.message;
         }
         this.toastr.error(errorMessage, 'Ops!');
         return throwError(errorMessage);

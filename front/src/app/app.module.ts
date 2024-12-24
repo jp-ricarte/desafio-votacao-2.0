@@ -1,24 +1,13 @@
-import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
-import { ReactiveFormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import { PautasComponent } from './pages/pautas/pautas.component';
-import { LoadingModule } from './utils/loading/loading.module';
-import { ConfirmDialogModule } from 'primeng/confirmdialog';
-
-import { ButtonModule } from 'primeng/button';
-import { PasswordModule } from 'primeng/password';
-import { InputTextModule } from 'primeng/inputtext';
 import { ConfirmationService, MessageService } from 'primeng/api';
-import { ToolbarModule } from 'primeng/toolbar';
-import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { DialogService } from 'primeng/dynamicdialog';
-import { MessageModule } from 'primeng/message';
 
 import { LayoutComponent } from './pages/layout/layout.component';
 import { PautaTableModule } from './pages/pautas/components/pauta-table/pauta-table.module';
@@ -26,8 +15,13 @@ import { PautaService } from './services/pauta.service';
 import { ToastrModule } from 'ngx-toastr';
 import { PautaInformacoesComponent } from './pages/pauta-informacoes/pauta-informacoes.component';
 import { CriarPautaModalModule } from './pages/pautas/components/criar-pauta-modal/criar-pauta-modal.module';
-import { CountdownGlobalConfig, CountdownModule } from 'ngx-countdown';
+import { CountdownGlobalConfig, } from 'ngx-countdown';
 import { UtilsModule } from './utils/utils.module';
+import { NgxMaskModule } from 'ngx-mask';
+import { UserService } from './services/user.service';
+import localePt from '@angular/common/locales/pt';
+
+registerLocaleData(localePt);
 
 @NgModule({
     declarations: [
@@ -46,7 +40,7 @@ import { UtilsModule } from './utils/utils.module';
         CriarPautaModalModule,
 
         UtilsModule,
-
+        NgxMaskModule.forRoot(),
         ToastrModule.forRoot({
             timeOut: 3000,
             positionClass: 'toast-top-right',
@@ -57,7 +51,9 @@ import { UtilsModule } from './utils/utils.module';
         ConfirmationService,
         MessageService,
         PautaService,
+        UserService,
         DialogService,
+        { provide: LOCALE_ID, useValue: 'pt-BR' },
         {
             provide: CountdownGlobalConfig,
             useFactory: () => ({ format: `d/M/yy HH:mm:ss` }),
