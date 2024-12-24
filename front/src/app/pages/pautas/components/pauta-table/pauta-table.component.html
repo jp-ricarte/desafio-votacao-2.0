@@ -1,17 +1,19 @@
 <div class="card">
-    <p-table #dt [value]="filteredPautas" [paginator]="true" [rows]="5">
+    <p-table #dt [value]="filteredPautas" [tableStyle]="{'min-width': '50rem'}" [resizableColumns]="true" [paginator]="true" [rows]="5">
         <ng-template pTemplate="caption">
-            <div class="d-flex align-items-center justify-content-between">
-                <div class="col-12 col-md-3">
+            <div class="row align-items-center justify-content-between">
+                <div class="col-12 col-md-3 mb-2">
                     <label for="title">Categoria</label>
                     <select class="form-control" (change)="onSelectChange($event)">
                         <option value="">Selecione</option>
                         <option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.category }}</option>
                     </select>
                 </div>
-                <button *ngIf="user.is_admin" type="button" class="btn btn-primary" (click)="createPauta()">
-                    <i class="pi pi-plus"></i> Criar Pauta
-                </button>
+                <div class="col-12 col-md-2 d-flex align-items-end">
+                    <button *ngIf="user.is_admin" type="button" class="btn btn-primary" (click)="createPauta()">
+                        <i class="pi pi-plus"></i> Criar Pauta
+                    </button>
+                </div>
             </div>
         </ng-template>
         <ng-template pTemplate="header">
